@@ -1,0 +1,13 @@
+---
+# tasks file for boxeman.pkg_config
+
+- name: Setup pkg config for OpenBSD
+  when: ansible_os_family == 'OpenBSD'
+  include: 'OpenBSD.yml'
+  tags: [ 'pkg_config']
+
+- name: Setup pkg config for FreeBSD
+  when: ansible_os_family == 'FreeBSD'
+  include: 'FreeBSD.yml'
+  tags: [ 'pkg_config']
+

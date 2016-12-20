@@ -1,0 +1,14 @@
+---
+#OpenBSD stuff
+pkg_config_openbsd_url: 'http://ftp.fr.openbsd.org/pub/OpenBSD/%c/packages/%a/'
+pkg_config_openbsd_mtier_url: 'https://stable.mtier.org/updates/%c/%a/'
+pkg_config_openbsd_mtier_enable: false
+pkg_config_openbsd_mtier_signify_key: 'RWSWGojZHWRK9spf+EcMAhK7KVVKi0Ez4q559J6ER1IDsV2sygepvQ+2'
+
+#FreeBSD stuff
+pkg_config_freebsd_disable_default: false
+pkg_config_freebsd_repo_path_clear: true
+pkg_config_freebsd_repo: []
+
+#internal
+__pkg_config_freebsd_repo_items: ''

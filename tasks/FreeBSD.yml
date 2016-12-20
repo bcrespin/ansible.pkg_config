@@ -1,0 +1,24 @@
+---
+- name: FreeBSD/Create pkg folder 
+  file: path=/usr/local/etc/pkg/repos/ state=directory owner=root group=wheel mode=0755 
+  when: 
+    (pkg_config_freebsd_disable_default == true ) or 
+    (pkg_config_freebsd_repo|length > 0)
+  tags: [ 'pkg_config' ]
+
+- name: FreeBSD/Disable default repo
+  template: src=disable_FreeBSD.conf.j2 dest=/usr/local/etc/pkg/repos/FreeBSD.conf owner=root group=wheel mode=0644
+  when: pkg_config_freebsd_disable_default == true
+  tags: [ 'pkg_config' ] 
+
+- name: FreeBSD/list repo to create
+  set_fact:
+     __pkg_config_freebsd_repo_items:  "{{ pkg_config_freebsd_repo.keys() }}"
+  when: pkg_config_freebsd_repo|length > 0
+  tags: [ 'pkg_config' ]
+
+- name: FreeBSD/Create repo file
+  template: src=repo_FreeBSD.conf.j2 dest=/usr/local/etc/pkg/repos/{{ item }}.conf owner=root group=wheel mode=0644 
+  with_items: "{{ __pkg_config_freebsd_repo_items }}"
+  when: pkg_config_freebsd_repo|length > 0
+  tags: [ 'pkg_config' ]

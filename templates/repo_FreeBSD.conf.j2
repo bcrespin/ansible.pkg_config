@@ -1,0 +1,6 @@
+#{{ ansible_managed }}
+{{ item  }}: {
+{% for (k,v) in pkg_config_freebsd_repo[item].iteritems() %}
+{{ k }}: {{ v }},
+{%endfor %}
+}

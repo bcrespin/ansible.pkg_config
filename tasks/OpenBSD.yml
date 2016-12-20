@@ -1,0 +1,15 @@
+---
+- name: OpenBSD/Get os version without dot
+  set_fact: 
+    __os_release_without_dot={{ ansible_distribution_release|regex_replace('\.','') }}
+  tags: ['pkg_config']
+
+- name: OpenBSD/Install mtier public key
+  template: src=signify_pkg.pub.j2 dest='/etc/signify/mtier-{{ __os_release_without_dot  }}-pkg.pub'
+  when:
+   - pkg_config_openbsd_mtier_enable == true
+  tags: ['pkg_config'] 
+
+- name: OpenBSD/create /etc/pkg.conf file
+  template: src=pkg-OpenBSD.conf.j2 dest='/etc/pkg.conf'
+  tags: ['pkg_config']
