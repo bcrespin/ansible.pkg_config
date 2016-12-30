@@ -1,6 +1,8 @@
 # {{ ansible_managed }}
 
-installpath = {{ pkg_config_openbsd_url }}
 {%if  pkg_config_openbsd_mtier_enable == true %}
-installpath += {{ pkg_config_openbsd_mtier_url }}
+installpath = {{ pkg_config_openbsd_mtier_url }}
+installpath += {{ pkg_config_openbsd_url }}
+{% else %}
+installpath = {{ pkg_config_openbsd_url }}
 {% endif %}
